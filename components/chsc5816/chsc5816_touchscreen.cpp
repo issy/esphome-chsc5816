@@ -112,7 +112,10 @@ void CHSC5816Touchscreen::update_touches() {
   union _rpt_point_t *ppt;
   
   if (!this->semi_touch_read_bytes(0x2000002c, data, sizeof(data))) {
-    ESP_LOGE(TAG, "CHSC5816 touch error: %x", data);
+    ESP_LOGE(TAG, "CHSC5816 touch error:");
+    for (int i = 0; i < sizeof(data); i++) {
+      ESP_LOGE(TAG, "%02x", data[i]);
+    }
     return;
   }
 
