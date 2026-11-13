@@ -30,7 +30,7 @@ bool CHSC5816Touchscreen::semi_touch_read_fwid()
   }
 //  delay(200);
   vTaskDelay(pdMS_TO_TICKS(200));
-  err = this->write(reinterpret_cast<const uint8_t *>(hdr0), 4, true);
+  err = this->write(reinterpret_cast<const uint8_t *>(hdr0), 4);
   if (err != ERROR_OK) {
     ESP_LOGE(TAG, "CHSC5816 semi_touch_read_fwid write 3 failed: %d", err);
     return false;
