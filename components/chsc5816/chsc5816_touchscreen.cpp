@@ -18,12 +18,12 @@ bool CHSC5816Touchscreen::semi_touch_read_fwid()
   uint8_t pdata[16];
 
 //  a_register = convert_big_endian(a_register);
-  ErrorCode err = this->write(reinterpret_cast<const uint8_t *>(hdr0), 4, true);
+  ErrorCode err = this->write(reinterpret_cast<const uint8_t *>(hdr0), 4);
   if (err != ERROR_OK) {
     ESP_LOGE(TAG, "CHSC5816 semi_touch_read_fwid write 1 failed: %d", err);
     return false;
   }
-  err = this->write(reinterpret_cast<const uint8_t *>(hdr1), 16, true);
+  err = this->write(reinterpret_cast<const uint8_t *>(hdr1), 16);
   if (err != ERROR_OK) {
     ESP_LOGE(TAG, "CHSC5816 semi_touch_read_fwid write 2 failed: %d", err);
     return false;
@@ -87,7 +87,7 @@ bool CHSC5816Touchscreen::semi_touch_read_bytes(uint32_t a_register, uint8_t* pd
 {
   a_register = convert_big_endian(a_register);
 
-  ErrorCode err = this->write(reinterpret_cast<const uint8_t *>(&a_register), 4, false);
+  ErrorCode err = this->write(reinterpret_cast<const uint8_t *>(&a_register), 4);
   if (err != ERROR_OK)
     return false;
   err = this->read(pdata, len);
